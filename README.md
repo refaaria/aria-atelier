@@ -4,7 +4,7 @@ A concept boutique website for haute horlogerie (luxury timepieces), built with
 [Next.js](https://nextjs.org) and Tailwind CSS. Created as a **student project for
 educational purposes**.
 
-Live demo: _(add your Vercel link here once deployed)_
+Live demo: _https://aria-atelier.vercel.app/_
 
 📖 **[How I built this →](./docs/HOW-I-BUILT-IT.md)** — the process, from Figma blueprint to deployed site.
 
