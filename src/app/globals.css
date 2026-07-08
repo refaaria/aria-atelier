@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------
+   Aria's Atelier — Haute Horlogerie
+   Design tokens
+--------------------------------------------------------------- */
+:root {
+  --ink: #0a0908;          /* deep near-black */
+  --ink-2: #100e0b;        /* warm charcoal (cards / sections) */
+  --ink-3: #17140f;        /* raised charcoal */
+  --cream: #f2ede2;        /* light section */
+  --cream-2: #e9e2d3;
+  --gold: #c2a35f;         /* primary gold */
+  --gold-soft: #d7bd85;    /* lighter gold (highlights) */
+  --gold-deep: #93712f;    /* gold shadow */
+  --line: rgba(194, 163, 95, 0.22);
+  --line-cream: rgba(26, 20, 12, 0.16);
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-cream: var(--cream);
+  --color-cream-2: var(--cream-2);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-gold-deep: var(--gold-deep);
+
+  --font-serif: var(--font-playfair);
+  --font-display: var(--font-cormorant);
+  --font-sans: var(--font-inter);
+
+  --tracking-luxe: 0.28em;
+}
+
+* {
+  border-color: var(--line);
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--ink);
+}
+
+body {
+  background: var(--ink);
+  color: #f4f1ea;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgba(194, 163, 95, 0.28);
+  color: #fff;
+}
+
+/* Utility: letter-spaced overline label */
+.overline {
+  font-family: var(--font-sans), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.32em;
+  font-size: 0.68rem;
+  font-weight: 500;
+}
+
+.font-serif { font-family: var(--font-serif), serif; }
+.font-display { font-family: var(--font-display), serif; }
+
+/* Thin custom scrollbar */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--ink); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--gold-deep), var(--gold));
+  border-radius: 999px;
+  border: 3px solid var(--ink);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
