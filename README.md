@@ -6,6 +6,8 @@ educational purposes**.
 
 Live demo: _(add your Vercel link here once deployed)_
 
+📖 **[How I built this →](./docs/HOW-I-BUILT-IT.md)** — the process, from Figma blueprint to deployed site.
+
 ## ⚠️ Disclaimer
 
 This is a **non-commercial student project** created for a campus assignment.
