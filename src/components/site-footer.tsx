@@ -74,9 +74,16 @@ export function SiteFooter() {
           </div>
         </Reveal>
 
-        <div className="mt-16 border-t border-gold/12 pt-8 text-center text-xs tracking-wide text-[#f4f1ea]/35">
-          © 2026 Aria&apos;s Atelier. Concept boutique — timepiece prices reflect approximate
-          manufacturer retail and are indicative only.
+        <div className="mt-16 space-y-3 border-t border-gold/12 pt-8 text-center text-xs tracking-wide text-[#f4f1ea]/35">
+          <p>
+            © 2026 Aria&apos;s Atelier. Concept boutique — timepiece prices reflect approximate
+            manufacturer retail and are indicative only.
+          </p>
+          <p className="mx-auto max-w-2xl text-[0.7rem] leading-relaxed text-[#f4f1ea]/30">
+            A non-commercial student project for educational purposes. All watch images, brand
+            names, and logos are the property of their respective owners and are used here for
+            demonstration only. Not affiliated with or endorsed by any brand.
+          </p>
         </div>
       </div>
     </footer>

@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Aria's Atelier
+
+A concept boutique website for haute horlogerie (luxury timepieces), built with
+[Next.js](https://nextjs.org) and Tailwind CSS. Created as a **student project for
+educational purposes**.
+
+Live demo: _(add your Vercel link here once deployed)_
+
+## ⚠️ Disclaimer
+
+This is a **non-commercial student project** created for a campus assignment.
+
+All watch images, brand names, logos, and trademarks (including but not limited to
+Rolex, Omega, Cartier, Patek Philippe, Audemars Piguet, and Jaeger-LeCoultre) are the
+property of their respective owners and are used here **for educational and
+demonstration purposes only**. This site is not affiliated with, endorsed by, or
+sponsored by any of these brands. No commercial use is intended, and nothing on this
+site is for sale. Prices shown are indicative only.
+
+If you are a rights holder and would like content removed, please open an issue on this
+repository.
+
+See [DISCLAIMER.md](./DISCLAIMER.md) for the full notice.
 
 ## Getting Started
 
-First, run the development server:
+Install dependencies and run the development server:
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser to view the site.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## Deploy
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The easiest way to deploy is with the [Vercel Platform](https://vercel.com/new).
+Import this repository and Vercel auto-detects the Next.js configuration.
