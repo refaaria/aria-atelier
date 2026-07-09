@@ -130,7 +130,11 @@ consistent size.
 ![Collection](docs/showcase/web-collection.png)
 
 The result: steel reads as steel, gold as gold, and every dial keeps its true
-colour.
+colour. Six houses, one consistent visual system:
+
+| Rolex | Cartier |
+|---|---|
+| ![Rolex collection](docs/showcase/web-collection-rolex.png) | ![Cartier collection](docs/showcase/web-collection-cartier.png) |
 
 ---
 
@@ -140,11 +144,18 @@ This is where most of the time went.
 
 - **Scroll‑following hero** — the watch shrinks and hands off to a small,
   clickable watch pinned in the corner that follows you to the bottom.
+
+![Hero, mid‑scroll](docs/showcase/web-hero-alt.png)
+
 - **Per‑watch detail pages**, themed from the dial colour, with a parallax brand
   watermark, an animated "highlight stage" for the full watch, and an **"In
   Motion" 3D showcase** that swivels the watch on a perspective axis.
 
 ![Detail](docs/showcase/web-detail.png)
+
+The "In Motion" block — a live 3D swivel of the actual product photo:
+
+![In Motion 3D showcase](docs/showcase/web-in-motion.png)
 
 - **A full‑screen slide‑in menu** — a numbered "Navigate" panel with the six
   maisons and a "Featured Timepieces" grid, staggering in on an Expo.out curve.
