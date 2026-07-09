@@ -44,8 +44,7 @@ export function ContactView() {
                 <motion.div
                   key={f.name}
                   initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: i * 0.08, ease: EASE }}
                 >
                   <label className="overline mb-2 block text-[#f4f1ea]/45">{f.label}</label>
@@ -60,8 +59,7 @@ export function ContactView() {
 
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.24, ease: EASE }}
               >
                 <label className="overline mb-2 block text-[#f4f1ea]/45">Message</label>

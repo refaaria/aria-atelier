@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { motion, useMotionValueEvent, useScroll, useTransform } from "motion/react";
 import { ArrowRight, ChevronDown } from "lucide-react";
-import { GoldButton, EASE, Reveal, Overline } from "@/components/motion-primitives";
+import { GoldButton, EASE, Reveal, Overline, useRevealVisible } from "@/components/motion-primitives";
 import { Ambient } from "@/components/ambient";
 import { brandById, type Watch } from "@/data/watches";
 import { WatchVisual } from "@/components/watch-visual";
@@ -37,6 +37,9 @@ export function WatchDetail({ watch }: { watch: Watch }) {
 
   const toOrder = () =>
     document.getElementById("order")?.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  const specRef = useRef<HTMLDListElement>(null);
+  const specVisible = useRevealVisible(specRef, 0.15);
 
   const specs = [
     { label: "Reference", value: watch.reference },
@@ -167,7 +170,7 @@ export function WatchDetail({ watch }: { watch: Watch }) {
             <Overline className="text-gold-deep">Specification</Overline>
             <h2 className="mt-5 font-serif text-4xl text-ink md:text-5xl">The Details</h2>
           </Reveal>
-          <motion.dl initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={{ visible: { transition: { staggerChildren: 0.08 } } }} className="mt-14">
+          <motion.dl ref={specRef} initial="hidden" animate={specVisible ? "visible" : "hidden"} variants={{ visible: { transition: { staggerChildren: 0.08 } } }} className="mt-14">
             {specs.map((s) => (
               <motion.div key={s.label} variants={{ hidden: { opacity: 0, y: 18 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE } } }} className="flex items-center justify-between border-t border-ink/15 py-6">
                 <dt className="overline text-ink/45">{s.label}</dt>
