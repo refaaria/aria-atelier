@@ -20,6 +20,19 @@ const REVEAL_THRESHOLD = 8;
 const MAX_DPR = 2;
 /** Frame held when the user prefers reduced motion (no scrubbing). */
 const REDUCED_MOTION_FRAME = 0;
+/**
+ * Where the watch sits in the viewport. Anchored to the RIGHT on desktop so
+ * frame 0 merges with the hero's right-side 3D watch; recentred on narrow
+ * screens so it isn't pushed off-canvas. `cx`/`cy` are the watch box centre as
+ * a fraction of the viewport; `wFrac`/`hFrac` are the box size the watch is
+ * contain-fit into (whole watch always visible, never cropped). Tune freely.
+ */
+const WATCH_ANCHOR = {
+  desktop: { cx: 0.75, cy: 0.5, wFrac: 0.5, hFrac: 0.82 },
+  mobile: { cx: 0.5, cy: 0.5, wFrac: 0.92, hFrac: 0.62 },
+};
+/** Below this CSS width we use the mobile anchor (matches Tailwind `lg`). */
+const DESKTOP_MIN_WIDTH = 1024;
 /* ====================================================== */
 
 type ScrollSequenceBgProps = {
@@ -73,7 +86,7 @@ export function ScrollSequenceBg({
       return null;
     }
 
-    /* ---------- draw one frame, transparent + "contain"-fit, centered ---------- */
+    /* ---------- draw one frame, transparent + "contain"-fit, anchored ---------- */
     function drawContain(img: HTMLImageElement) {
       if (!ctx) return;
       const cw = canvas!.clientWidth;
@@ -84,11 +97,17 @@ export function ScrollSequenceBg({
 
       const iw = img.naturalWidth || FRAME_WIDTH;
       const ih = img.naturalHeight || FRAME_HEIGHT;
-      const scale = Math.min(cw / iw, ch / ih); // contain → whole watch visible
+
+      // Contain-fit into an anchored box (right on desktop, centred on mobile)
+      // so the watch overlaps the hero's right-side watch at the top.
+      const a = window.innerWidth >= DESKTOP_MIN_WIDTH ? WATCH_ANCHOR.desktop : WATCH_ANCHOR.mobile;
+      const boxW = cw * a.wFrac;
+      const boxH = ch * a.hFrac;
+      const scale = Math.min(boxW / iw, boxH / ih); // whole watch visible, never cropped
       const dw = iw * scale;
       const dh = ih * scale;
-      const dx = (cw - dw) * 0.5;
-      const dy = (ch - dh) * 0.5;
+      const dx = cw * a.cx - dw * 0.5;
+      const dy = ch * a.cy - dh * 0.5;
 
       ctx.imageSmoothingEnabled = true;
       ctx.imageSmoothingQuality = "high";

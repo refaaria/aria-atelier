@@ -28,18 +28,20 @@ export default function HomePage() {
 
       <HomeHero />
 
-      {/* All page content rides ABOVE the fixed watch canvas. */}
+      {/* All page content rides ABOVE the fixed watch canvas. Section
+          backgrounds are semi-transparent so the scrubbing watch shows through
+          as you scroll (tune the /NN alpha on each bg-* below). */}
       <div className="relative z-[2]">
 
       {/* Maisons strip — running logos */}
-      <section className="border-y border-gold/12 bg-ink py-12">
+      <section className="border-y border-gold/12 bg-ink/60 py-12">
         <Reveal>
           <LogoMarquee className="mx-auto max-w-[1400px]" />
         </Reveal>
       </section>
 
       {/* The Maison — cream */}
-      <section className="bg-cream text-ink">
+      <section className="bg-cream/80 text-ink">
         <div className="mx-auto grid max-w-[1400px] gap-12 px-6 py-28 md:grid-cols-2 md:px-10 md:py-36">
           <Reveal>
             <Overline className="text-gold-deep">The Maison</Overline>
@@ -65,7 +67,7 @@ export default function HomePage() {
       </section>
 
       {/* Signature Pieces */}
-      <section className="bg-ink py-28 md:py-36">
+      <section className="bg-ink/60 py-28 md:py-36">
         <div className="mx-auto max-w-[1400px] px-6 md:px-10">
           <Reveal className="text-center">
             <Overline>The Collection</Overline>
@@ -87,7 +89,7 @@ export default function HomePage() {
       </section>
 
       {/* Stats */}
-      <section className="border-y border-gold/12 bg-ink-2 py-16">
+      <section className="border-y border-gold/12 bg-ink-2/55 py-16">
         <Stagger className="mx-auto grid max-w-[1000px] grid-cols-1 gap-10 px-6 text-center sm:grid-cols-3">
           {stats.map((s) => (
             <StaggerItem key={s.label}>
@@ -99,7 +101,7 @@ export default function HomePage() {
       </section>
 
       {/* Gallery preview — cream */}
-      <section className="bg-cream text-ink">
+      <section className="bg-cream/80 text-ink">
         <div className="mx-auto grid max-w-[1400px] items-center gap-14 px-6 py-28 md:grid-cols-[0.9fr_1.1fr] md:px-10 md:py-32">
           <Reveal>
             <Overline className="text-gold-deep">The Gallery</Overline>
@@ -136,7 +138,7 @@ export default function HomePage() {
       </section>
 
       {/* Invitation */}
-      <section className="bg-ink py-24 text-center">
+      <section className="bg-ink/60 py-24 text-center">
         <Reveal>
           <div className="relative mx-auto mb-10 flex h-16 w-16 items-center justify-center rounded-full border border-gold/40">
             <span className="absolute -inset-2 rounded-full border border-dashed border-gold/25 [animation:spin_26s_linear_infinite]" />
@@ -156,7 +158,7 @@ export default function HomePage() {
       </section>
 
       {/* subtle campus-project disclaimer */}
-      <div className="bg-ink pb-12 text-center">
+      <div className="bg-ink/60 pb-12 text-center">
         <p className="mx-auto max-w-2xl px-6 text-[11px] leading-relaxed text-[#f4f1ea]/25">
           A student concept project made for a campus assignment. Aria&apos;s Atelier is fictitious
           and is not affiliated with, endorsed by, or connected to any watch manufacturer — all
