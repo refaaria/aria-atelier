@@ -8,7 +8,6 @@ import { GoldButton, EASE, Reveal, Overline, useRevealVisible } from "@/componen
 import { Ambient } from "@/components/ambient";
 import { brandById, type Watch } from "@/data/watches";
 import { WatchVisual } from "@/components/watch-visual";
-import { WatchCanvas } from "@/components/three/watch-canvas";
 import { WatchStage } from "@/components/watch-stage";
 import { formatPrice } from "@/lib/utils";
 
@@ -95,16 +94,9 @@ export function WatchDetail({ watch }: { watch: Watch }) {
         </div>
 
         <div className="relative z-10 mx-auto grid w-full max-w-[1400px] items-center gap-12 px-6 md:px-10 lg:grid-cols-2">
-          <motion.div style={{ y: foldWatchY, scale: foldWatchScale }} className="flex flex-col items-center justify-center">
-            <motion.div initial={{ opacity: 0, scale: 0.86 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.3, ease: EASE }} className="w-full">
-              <WatchCanvas watch={watch} tilt={0.28} className="mx-auto h-[440px] w-full max-w-[520px] sm:h-[520px]" />
-            </motion.div>
-            <motion.div
-              className="pointer-events-none -mt-4 overline text-[0.58rem] text-gold/70"
-              animate={{ opacity: [0.35, 0.85, 0.35] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            >
-              Drag to explore
+          <motion.div style={{ y: foldWatchY, scale: foldWatchScale }} className="flex justify-center">
+            <motion.div initial={{ opacity: 0, scale: 0.82 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.3, ease: EASE }} className="origin-center scale-[0.85] sm:scale-100">
+              <WatchVisual watch={watch} size={360} ring glow />
             </motion.div>
           </motion.div>
 
@@ -149,13 +141,22 @@ export function WatchDetail({ watch }: { watch: Watch }) {
               {[15, 32, 54, 70, 86].map((l, i) => (
                 <motion.span key={l} className="absolute rounded-full bg-white/40" style={{ left: `${l}%`, top: `${20 + (i * 13) % 60}%`, width: 2 + (i % 2), height: 2 + (i % 2) }} animate={{ y: [0, -18, 0], opacity: [0, 0.8, 0] }} transition={{ duration: 6 + i, delay: i * 0.7, repeat: Infinity, ease: "easeInOut" }} />
               ))}
-              <WatchCanvas
-                watch={watch}
-                interactive={false}
-                autoRotate
-                tilt={0.24}
-                className="h-full w-full"
-              />
+              <div style={{ perspective: 1100 }} className="relative">
+                <motion.div
+                  className="[transform-style:preserve-3d]"
+                  animate={{ rotateY: [-34, 34, -34], rotateX: [11, -8, 11], scale: [1, 1.05, 1] }}
+                  transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <WatchVisual watch={watch} size={300} glow float={false} />
+                </motion.div>
+                {/* soft floor shadow that squishes with the tilt */}
+                <motion.div
+                  aria-hidden
+                  className="absolute -bottom-6 left-1/2 h-6 w-2/3 -translate-x-1/2 rounded-[50%] bg-black/50 blur-lg"
+                  animate={{ scaleX: [0.7, 1, 0.7], opacity: [0.35, 0.6, 0.35] }}
+                  transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+                />
+              </div>
               <div className="absolute bottom-5 left-0 right-0 text-center overline text-white/50">{watch.name} · In Motion</div>
             </div>
           </Reveal>

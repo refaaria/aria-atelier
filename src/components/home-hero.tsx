@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { GoldButton, EASE } from "@/components/motion-primitives";
 import { WatchVisual } from "@/components/watch-visual";
-import { WatchCanvas } from "@/components/three/watch-canvas";
 import { watchById } from "@/data/watches";
 
 function smoothToBottom() {
@@ -101,23 +100,15 @@ export function HomeHero() {
         ))}
       </div>
 
-      {/* ---------- big hero watch — real 3D, drag to explore (fades on scroll) ---------- */}
-      <div className="fixed right-[3%] top-1/2 z-[5] hidden -translate-y-1/2 lg:block">
+      {/* ---------- big hero watch (fixed, fades as you scroll) ---------- */}
+      <div className="fixed right-[6%] top-1/2 z-[5] hidden -translate-y-1/2 lg:block" aria-hidden>
         <motion.div style={{ x: heroX, y: heroY, scale: heroScale, opacity: heroOpacity }}>
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.4, delay: 0.4, ease: EASE }}
-            className="relative"
+            initial={{ scale: 0.82, rotate: -5 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{ type: "spring", stiffness: 55, damping: 14, delay: 0.35 }}
           >
-            <WatchCanvas watch={heroWatch} className="h-[540px] w-[560px]" tilt={0.3} />
-            <motion.div
-              className="pointer-events-none absolute inset-x-0 bottom-2 text-center overline text-[0.58rem] text-gold/70"
-              animate={{ opacity: [0.35, 0.8, 0.35] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            >
-              Drag to explore
-            </motion.div>
+            <WatchVisual watch={heroWatch} size={392} ring glow />
           </motion.div>
         </motion.div>
       </div>
