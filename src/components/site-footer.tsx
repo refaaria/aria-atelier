@@ -13,7 +13,7 @@ const explore = [
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-gold/15 bg-ink">
+    <footer className="relative z-[2] border-t border-gold/15 bg-ink/80">
       <div className="mx-auto max-w-[1400px] px-6 py-20 md:px-10">
         <Reveal className="grid gap-14 md:grid-cols-[1.4fr_1fr_1.2fr_1.3fr]">
           <div>
