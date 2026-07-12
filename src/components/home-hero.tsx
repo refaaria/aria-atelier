@@ -31,12 +31,9 @@ export function HomeHero() {
     return () => window.removeEventListener("resize", on);
   }, []);
 
-  // The big hero watch shrinks away as you scroll, handing off to a small
-  // watch pinned in the bottom-right corner that follows you to the bottom.
-  const heroOpacity = useTransform(scrollY, [0, vh * 0.4, vh * 0.7], [1, 0.9, 0]);
-  const heroScale = useTransform(scrollY, [0, vh * 0.7], [1, 0.66]);
-  const heroX = useTransform(scrollY, [0, vh * 0.7], [0, 60]);
-  const heroY = useTransform(scrollY, [0, vh * 0.7], [0, 60]);
+  // The large hero watch is the scroll-linked sequence canvas (ScrollSequenceBg,
+  // rendered behind this section). A small watch fades in pinned to the
+  // bottom-right corner as you scroll, as a persistent "enquire" shortcut.
   const miniOpacity = useTransform(scrollY, [vh * 0.5, vh * 0.82], [0, 1]);
   const textY = useTransform(scrollY, [0, vh], [0, 90]);
   const textFade = useTransform(scrollY, [0, vh * 0.7], [1, 0]);
@@ -100,18 +97,8 @@ export function HomeHero() {
         ))}
       </div>
 
-      {/* ---------- big hero watch (fixed, fades as you scroll) ---------- */}
-      <div className="fixed right-[6%] top-1/2 z-[5] hidden -translate-y-1/2 lg:block" aria-hidden>
-        <motion.div style={{ x: heroX, y: heroY, scale: heroScale, opacity: heroOpacity }}>
-          <motion.div
-            initial={{ scale: 0.82, rotate: -5 }}
-            animate={{ scale: 1, rotate: 0 }}
-            transition={{ type: "spring", stiffness: 55, damping: 14, delay: 0.35 }}
-          >
-            <WatchVisual watch={heroWatch} size={392} ring glow />
-          </motion.div>
-        </motion.div>
-      </div>
+      {/* The big hero watch is the scroll-linked sequence canvas behind this
+          section (ScrollSequenceBg), so no static watch is rendered here. */}
 
       {/* ---------- clickable follow watch, pinned bottom-right ---------- */}
       <motion.button
@@ -168,13 +155,6 @@ export function HomeHero() {
             <GoldButton href="/gallery" variant="outline">Visit the Gallery</GoldButton>
           </motion.div>
         </motion.div>
-
-        {/* mobile in-flow watch */}
-        <div className="flex justify-center lg:hidden">
-          <motion.div initial={{ scale: 0.86 }} animate={{ scale: 1 }} transition={{ duration: 1.4, delay: 0.4, ease: EASE }}>
-            <WatchVisual watch={heroWatch} size={260} glow ring />
-          </motion.div>
-        </div>
       </div>
 
       {/* scroll cue */}
