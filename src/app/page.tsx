@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { HomeHero } from "@/components/home-hero";
+import { ScrollSequenceBg } from "@/components/scroll-sequence-bg";
 import { WatchCard } from "@/components/watch-card";
 import { WatchVisual } from "@/components/watch-visual";
 import { LogoMarquee } from "@/components/brand-logo";
@@ -20,7 +21,15 @@ const galleryPreview = ["rolex-datejust-41", "patek-nautilus-5711", "cartier-san
 export default function HomePage() {
   return (
     <>
+      {/* Scroll-linked watch sequence — fixed background layer (z-1).
+          Sits ABOVE the hero's animated background (z-auto) and BELOW all
+          page content, which is lifted to z-2 (below) / z-10 (hero content). */}
+      <ScrollSequenceBg />
+
       <HomeHero />
+
+      {/* All page content rides ABOVE the fixed watch canvas. */}
+      <div className="relative z-[2]">
 
       {/* Maisons strip — running logos */}
       <section className="border-y border-gold/12 bg-ink py-12">
@@ -153,6 +162,8 @@ export default function HomePage() {
           and is not affiliated with, endorsed by, or connected to any watch manufacturer — all
           brand names and trademarks belong to their respective owners.
         </p>
+      </div>
+
       </div>
     </>
   );
