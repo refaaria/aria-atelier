@@ -34,6 +34,9 @@ export default function HomePage() {
         {/* Legibility + mood: darker on the left where the hero text sits,
             fading to reveal the video on the right. */}
         <div className="absolute inset-0 bg-gradient-to-r from-ink/80 via-ink/45 to-ink/15" />
+        {/* Top scrim: keep the header strip solid ink like before, so the video
+            does not show through the (transparent-at-top) navigation bar. */}
+        <div className="absolute inset-x-0 top-0 h-52 bg-gradient-to-b from-ink via-ink/85 to-transparent" />
       </div>
 
       {/* Animated ambient backdrop — fixed, follows the whole scroll. */}
