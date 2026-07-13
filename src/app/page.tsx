@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { HomeHero } from "@/components/home-hero";
 import { ScrollSequenceBg } from "@/components/scroll-sequence-bg";
 import { SiteBackdrop } from "@/components/site-backdrop";
+import { HeroVideo } from "@/components/hero-video";
 import { WatchCard } from "@/components/watch-card";
 import { WatchVisual } from "@/components/watch-visual";
 import { LogoMarquee } from "@/components/brand-logo";
@@ -29,16 +30,7 @@ export default function HomePage() {
       {/* Looping muted background video — hero region only, scrolls away with
           the page (absolute, NOT fixed, so it does not follow you down). */}
       <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-screen overflow-hidden">
-        <video
-          className="h-full w-full object-cover"
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-        >
-          <source src="/website_background.mp4" type="video/mp4" />
-        </video>
+        <HeroVideo />
         {/* Legibility + mood: darker on the left where the hero text sits,
             fading to reveal the video on the right. */}
         <div className="absolute inset-0 bg-gradient-to-r from-ink/80 via-ink/45 to-ink/15" />
