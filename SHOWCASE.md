@@ -11,7 +11,7 @@ present itself online: dark, gold‑accented, unhurried, and heavy on motion. Th
 document walks through the whole thing — from the first Figma frames to the final
 deployed site — and explains the decisions behind each part.
 
-**Live site:** deployed on Vercel · **Stack:** Next.js 16 · React 19 · TypeScript · Tailwind CSS v4 · Motion (Framer Motion)
+**Live site:** deployed on Vercel · **Stack:** Next.js 16 · React 19 · TypeScript · Tailwind CSS v4 · Motion (Framer Motion) · GSAP ScrollTrigger
 
 ---
 
@@ -27,7 +27,9 @@ legendary maisons. The brief I set myself:
 - **Dark and gold.** Deep near‑black (`#0a0908`, never pure black) with a warm
   gold accent and a cream section for contrast.
 - **Motion everywhere, but restrained.** Slow reveals, floating watches, a
-  scroll‑following hero, 3D showcases — all on a calm Expo.out easing curve.
+  cinematic hero (an ambient video plus a scroll‑scrubbed watch sequence), an
+  animated backdrop that follows you all the way down, 3D showcases — all on a
+  calm Expo.out easing curve.
 
 ---
 
@@ -121,11 +123,20 @@ fallback if an image is ever missing.
 ## 5 · Real photos, cleanly cut out
 
 The product shots came on white studio backgrounds, which look wrong on a dark
-theme. I automated the cut‑outs with an image pipeline (Node + `sharp`): an
-ML matte for most pieces, and a high‑contrast edge‑flood for the dark‑strap
-watches (where it protects the strap instead of eating it), then **trim +
-normalise every image to a uniform square canvas** so they all display at a
-consistent size.
+theme. I automated the cut‑outs with a Node + `sharp` pipeline that works
+straight from the original photos:
+
+- a **border flood‑fill** removes only the background that's connected to the
+  image edge — so a white dial enclosed by the case is never touched;
+- a **texture guard** (local‑variance check) keeps brushed and polished metal
+  instead of eating the bracelet — bright steel is the hard case, since it's
+  nearly as light as the white backdrop;
+- **edge matting** fades the anti‑aliased boundary by how close each pixel is to
+  the background, so there's no white halo/fringe around the watch;
+- the soft studio **shadow is dropped**, and the largest connected component is
+  kept to clean up stray specks;
+- finally every image is **trimmed and normalised to a uniform square canvas** so
+  they all display at a consistent size.
 
 ![Collection](docs/showcase/web-collection.png)
 
@@ -142,8 +153,19 @@ colour. Six houses, one consistent visual system:
 
 This is where most of the time went.
 
-- **Scroll‑following hero** — the watch shrinks and hands off to a small,
-  clickable watch pinned in the corner that follows you to the bottom.
+- **A cinematic, layered hero.** Back to front: a muted, looping background
+  **video**; an **animated ambient backdrop** (glow blobs, rotating light rays,
+  drifting dust, concentric rings) that is `position: fixed` so it follows you
+  the *whole* way down the page; a **scroll‑linked watch sequence** — an
+  Apple‑AirPods‑style `<canvas>` that GSAP **ScrollTrigger** scrubs through 240
+  transparent frames as you scroll (driven by scroll position, **no pinning**),
+  drawn right‑anchored so it lines up with the hero; and finally the headline and
+  content on top. The video stays at the top and scrolls away; the backdrop and
+  watch stay with you, and the lower sections are semi‑transparent so both show
+  through as you read.
+
+- **Scroll‑following corner watch** — a small, clickable watch fades in pinned to
+  the bottom‑right and follows you to the bottom as a quick "enquire" shortcut.
 
 ![Hero, mid‑scroll](docs/showcase/web-hero-alt.png)
 
@@ -216,9 +238,10 @@ export function useRevealVisible(ref, amount = 0.15) {
 | Framework | Next.js 16 (App Router, static generation) |
 | Language | TypeScript |
 | Styling | Tailwind CSS v4 (CSS‑first `@theme`) |
-| Animation | Motion (Framer Motion) |
+| Animation | Motion (Framer Motion) · GSAP ScrollTrigger (scroll‑scrubbed `<canvas>`) |
 | Fonts | Playfair Display · Cormorant Garamond · Inter (`next/font`) |
-| Image pipeline | `sharp` + ML background removal |
+| Hero media | Looping background video (720p H.264, `ffmpeg` + faststart) · 240‑frame WebP image sequence |
+| Image pipeline | `sharp` — border flood‑fill + texture‑guard + edge‑matte cut‑outs |
 | Hosting | Vercel (auto‑deploy on push to `main`) |
 
 ---

@@ -59,9 +59,25 @@ with:
   loads.
 - **Motion** — page transitions and scroll reveals use the **Motion** library, wrapped
   in a small set of primitives (`Reveal`, etc.) so animation stays consistent.
+- **A cinematic, layered hero** — behind the headline I stack several background
+  layers: a looping, muted, autoplaying **background video** that sits at the top and
+  scrolls away; an **animated ambient backdrop** (`site-backdrop.tsx`) that is
+  `position: fixed` so it follows the whole scroll; and a **scroll‑linked watch
+  sequence** (`scroll-sequence-bg.tsx`) — an Apple‑AirPods‑style `<canvas>` that
+  **GSAP ScrollTrigger** scrubs through 240 transparent frames as you scroll, with no
+  pinning. The lower page sections are semi‑transparent so the backdrop and watch show
+  through while you read.
+- **Reliable autoplay & smooth video** — the video is a small client component that
+  forces `play()` and re‑tries on buffering / visibility / first gesture (muted autoplay
+  is otherwise easily deferred by browsers), and the file is re‑encoded to 720p H.264
+  with `+faststart` so it starts instantly instead of stalling.
+- **Clean cut‑outs** — the watch photos are background‑removed from their originals with
+  a `sharp` pipeline (border flood‑fill + a texture guard that protects metal + edge
+  matting to kill the white fringe); see the writeup in the showcase.
 - **Component architecture** — the UI is split into focused components
   (`site-nav`, `watch-card`, `watch-stage`, `collection-view`, `maison-card`,
-  `ambient`, and more) under [`src/components`](../src/components).
+  `ambient`, `site-backdrop`, `hero-video`, `scroll-sequence-bg`, and more) under
+  [`src/components`](../src/components).
 
 ## 5. Tools I used
 
@@ -72,9 +88,10 @@ with:
 | Language | **TypeScript** |
 | UI library | **React 19** |
 | Styling | **Tailwind CSS v4** + custom CSS design tokens |
-| Animation | **Motion** |
+| Animation | **Motion** + **GSAP ScrollTrigger** (scroll‑scrubbed canvas) |
 | Icons | **lucide-react** |
-| Image processing | **sharp** |
+| Hero media | Background video (720p H.264 via **ffmpeg**) + 240‑frame WebP sequence |
+| Image processing | **sharp** (border flood‑fill + edge‑matte cut‑outs) |
 | Fonts | Playfair Display, Cormorant Garamond, Inter (via `next/font`) |
 | Hosting | **Vercel** (connected to this GitHub repo) |
 | AI assistance | **Claude** — used for pair-programming |
