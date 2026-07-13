@@ -223,9 +223,9 @@ export function ScrollSequenceBg({
       ref={canvasRef}
       aria-hidden
       // Fixed background layer: never traps pointer events, never fills a bg.
-      // z-index chosen to sit ABOVE the hero's animated background (z-auto/0)
-      // and BELOW all page content (hero content z-10, sections lifted to z-2).
-      className={`pointer-events-none fixed inset-0 z-[1] h-full w-full ${className}`}
+      // z-3 sits ABOVE the hero video (z-1) and animated backdrop (z-2) and
+      // BELOW all page content (hero content z-10, sections lifted to z-4).
+      className={`pointer-events-none fixed inset-0 z-[3] h-full w-full ${className}`}
       style={{ opacity: 0, transition: "opacity 700ms ease" }}
     />
   );
