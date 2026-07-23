@@ -28,13 +28,15 @@ export function WatchCard({
         },
       }}
       className="group relative"
+      whileHover={{ y: -8 }}
+      transition={{ type: "spring", stiffness: 200, damping: 22 }}
     >
       <Link
         href={`/watch/${watch.id}`}
-        className="relative flex flex-col items-center overflow-hidden border border-gold/12 bg-ink-2 px-8 py-12 text-center transition-colors duration-500 hover:border-gold/45"
+        className="surface-card sheen relative flex flex-col items-center overflow-hidden border border-gold/12 px-8 py-12 text-center hover:border-gold/45"
       >
         {/* hover glow */}
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(194,163,95,0.10),transparent_65%)] opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(194,163,95,0.12),transparent_65%)] opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
 
         <motion.div
           className="relative"
@@ -48,7 +50,7 @@ export function WatchCard({
         <div className="relative mt-4 overline text-gold/80">{brand?.name}</div>
         <h3 className="relative mt-3 font-serif text-2xl text-[#f6f2e9]">{watch.name}</h3>
 
-        <div className="relative my-5 h-px w-10 bg-gold/40" />
+        <div className="rule-gold relative my-5 w-12 transition-[width] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:w-20" />
 
         <div className="relative tabular-nums text-[#f4f1ea]/75">{formatPrice(watch.price)}</div>
 

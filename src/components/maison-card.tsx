@@ -12,7 +12,7 @@ export function MaisonCard({ brand, watch, count }: { brand: Brand; watch?: Watc
     <StaggerItem>
       <Link
         href={`/maisons/${brand.id}`}
-        className="group relative flex h-full flex-col items-center overflow-hidden border border-gold/12 bg-ink-2 px-8 py-12 text-center transition-colors duration-500 hover:border-gold/45"
+        className="surface-card sheen group relative flex h-full flex-col items-center overflow-hidden border border-gold/12 px-8 py-12 text-center hover:-translate-y-2 hover:border-gold/45"
       >
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_25%,rgba(194,163,95,0.12),transparent_65%)] opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
 
@@ -32,7 +32,7 @@ export function MaisonCard({ brand, watch, count }: { brand: Brand; watch?: Watc
         <h2 className="relative mt-2 font-serif text-2xl text-[#f6f2e9]">{brand.name}</h2>
         <p className="relative mt-2 text-sm text-[#f4f1ea]/45">{brand.line}</p>
 
-        <div className="relative my-5 h-px w-10 bg-gold/40 transition-all duration-500 group-hover:w-16" />
+        <div className="rule-gold relative my-5 w-12 transition-[width] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:w-20" />
         <div className="relative overline text-[#f4f1ea]/45">{count} Timepieces</div>
 
         <div className="relative mt-6 inline-flex items-center gap-2 overline text-gold">

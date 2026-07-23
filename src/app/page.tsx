@@ -67,7 +67,7 @@ export default function HomePage() {
             <h2 className="mt-6 max-w-md font-serif text-4xl leading-tight text-ink md:text-5xl">
               A Boutique of Exceptional Timepieces
             </h2>
-            <div className="mt-8 h-px w-16 bg-ink/30" />
+            <div className="mt-8 h-px w-20 bg-[linear-gradient(90deg,rgba(147,113,47,.85),transparent)]" />
           </Reveal>
           <Reveal delay={0.15} className="space-y-6 text-[15px] leading-relaxed text-ink/70">
             <p>
@@ -91,6 +91,7 @@ export default function HomePage() {
           <Reveal className="text-center">
             <Overline>The Collection</Overline>
             <h2 className="mt-5 font-serif text-4xl text-[#f6f2e9] md:text-5xl">Signature Pieces</h2>
+            <div className="rule-gold mx-auto mt-7 w-24" />
           </Reveal>
 
           <Stagger className="mt-16 grid gap-6 md:grid-cols-3" gap={0.14}>
@@ -143,7 +144,7 @@ export default function HomePage() {
                   <StaggerItem key={w.id}>
                     <Link
                       href={`/watch/${w.id}`}
-                      className="group flex aspect-[4/5] items-center justify-center overflow-hidden border border-ink/10 bg-ink transition-colors hover:border-gold/50"
+                      className="surface-card sheen group flex aspect-[4/5] items-center justify-center overflow-hidden border border-ink/10 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1.5 hover:border-gold/50"
                     >
                       <div className="transition-transform duration-700 group-hover:scale-105">
                         <WatchVisual watch={w} size={172} float={false} />

@@ -142,21 +142,21 @@ export function GoldButton({
   className?: string;
 } & Partial<ComponentProps<typeof Link>>) {
   const base = cn(
-    "group relative inline-flex cursor-pointer items-center justify-center overflow-hidden",
-    "px-8 py-3.5 overline transition-colors duration-500",
+    "group sheen relative inline-flex cursor-pointer items-center justify-center overflow-hidden",
+    "px-8 py-3.5 overline transition-[color,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
     variant === "solid"
-      ? "bg-gold text-ink hover:text-ink"
-      : "border border-gold/50 text-gold hover:text-ink",
+      ? "gold-metal btn-gold-solid text-ink"
+      : "btn-gold-outline border border-gold/45 text-gold hover:text-ink hover:border-gold/80",
     className,
   );
 
   const inner = (
     <>
       {variant === "outline" && (
-        <span className="absolute inset-0 -z-0 origin-left scale-x-0 bg-gold transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
+        <span className="gold-metal absolute inset-0 -z-0 origin-left scale-x-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
       )}
       {variant === "solid" && (
-        <span className="absolute inset-0 -z-0 origin-left scale-x-0 bg-gold-soft transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
+        <span className="gold-metal-soft absolute inset-0 -z-0 opacity-0 transition-opacity duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-100" />
       )}
       <span className="relative z-10 flex items-center gap-2">{children}</span>
     </>

@@ -77,6 +77,99 @@ body {
   border: 3px solid var(--ink);
 }
 
+/* ---------------------------------------------------------------
+   Luxury material system
+   Depth comes from layered gradients + warm elevation + hairline
+   highlights — never flat fills. Gold is metallic, not a solid swatch.
+--------------------------------------------------------------- */
+:root {
+  /* Metallic gold — a raked gradient so it catches "light" like brushed metal */
+  --grad-gold: linear-gradient(135deg, #8a6a2c 0%, #c2a35f 34%, #ecdaa6 50%, #c2a35f 66%, #8a6a2c 100%);
+  --grad-gold-soft: linear-gradient(135deg, #c2a35f 0%, #ecdaa6 50%, #c2a35f 100%);
+
+  /* Raised surfaces: light pools at the top, settles into shadow at the base */
+  --surface-card: linear-gradient(
+    180deg,
+    rgba(255, 252, 244, 0.055) 0%,
+    rgba(255, 252, 244, 0.018) 38%,
+    rgba(0, 0, 0, 0.20) 100%
+  );
+
+  /* Warm-black elevation scale (never pure #000 — avoids OLED smear) */
+  --shadow-1: 0 1px 2px rgba(0,0,0,.35), 0 2px 10px rgba(0,0,0,.26);
+  --shadow-2: 0 2px 6px rgba(0,0,0,.40), 0 14px 32px rgba(0,0,0,.34);
+  --shadow-3: 0 6px 18px rgba(0,0,0,.46), 0 30px 64px rgba(0,0,0,.44);
+  --glow-gold: 0 0 0 1px rgba(194,163,95,.30), 0 14px 44px rgba(194,163,95,.13);
+
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Raised card surface — gradient body, hairline top highlight, real elevation */
+.surface-card {
+  background-color: var(--ink-2);
+  background-image: var(--surface-card);
+  box-shadow: var(--shadow-2), inset 0 1px 0 rgba(255, 250, 235, 0.07);
+  transition:
+    box-shadow 0.6s var(--ease-expo),
+    transform 0.6s var(--ease-expo),
+    border-color 0.5s var(--ease-expo);
+}
+.surface-card:hover {
+  box-shadow: var(--shadow-3), var(--glow-gold), inset 0 1px 0 rgba(255, 250, 235, 0.13);
+}
+
+/* Gold button materials (kept in CSS — multi-shadow arbitrary values are
+   unreliable through Tailwind's parser) */
+.btn-gold-solid {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 250, 235, 0.45);
+}
+.btn-gold-solid:hover {
+  box-shadow: 0 10px 34px rgba(194, 163, 95, 0.30), inset 0 1px 0 rgba(255, 250, 235, 0.60);
+}
+.btn-gold-outline:hover {
+  box-shadow: 0 10px 34px rgba(194, 163, 95, 0.18);
+}
+
+/* Metallic gold fill / text */
+.gold-metal { background-image: var(--grad-gold); }
+.gold-metal-soft { background-image: var(--grad-gold-soft); }
+.text-gold-metal {
+  background-image: var(--grad-gold-soft);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Hairline rule that fades out at both ends (replaces flat 1px bars) */
+.rule-gold {
+  height: 1px;
+  border: 0;
+  background-image: linear-gradient(90deg, transparent, rgba(194, 163, 95, 0.7), transparent);
+}
+
+/* Light sheen that sweeps across a surface on hover */
+.sheen { position: relative; overflow: hidden; }
+.sheen::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -60%;
+  width: 45%;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(255, 248, 230, 0.20), transparent);
+  transform: translateX(-140%) skewX(-18deg);
+}
+@keyframes sheen-sweep { to { transform: translateX(420%) skewX(-18deg); } }
+.group:hover .sheen::after { animation: sheen-sweep 0.95s var(--ease-expo) forwards; }
+
+/* Visible keyboard focus (a11y) — gold ring, never removed */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -84,4 +177,5 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
+  .group:hover .sheen::after { animation: none !important; }
 }
